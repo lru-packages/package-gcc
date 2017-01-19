@@ -106,7 +106,7 @@ gcc6-compile:
 .PHONY: install-tmp
 install-tmp:
 	mkdir -p /tmp/installdir-$(NAME)-$(VERSION);
-	cd ./gcc-$(VERSION) && \
+	cd ./gcc-build && \
 		make install DESTDIR=/tmp/installdir-$(NAME)-$(VERSION);
 
 #-------------------------------------------------------------------------------
@@ -164,8 +164,9 @@ package:
 		--rpm-changelog CHANGELOG-$(NAME).txt \
 		--rpm-dist el$(RHEL) \
 		--rpm-auto-add-directories \
-		--after-install after-install-libs.sh \
 		usr/local/lib \
+		usr/local/lib64 \
+		usr/local/libexec \
 	;
 
 	# Development package
