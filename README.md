@@ -9,5 +9,5 @@ See <https://gcc.gnu.org> for releases.
 Edit the `Makefile` to ensure that you are setting the intended version, then run `make`.
 
 ```bash
-make
+make gcc6
 ```
