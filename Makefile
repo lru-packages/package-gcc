@@ -97,7 +97,6 @@ gcc6-compile:
 			--disable-multilib \
 			--enable-threads \
 			--enable-tls \
-			--with-cpu-64 \
 			--enable-bootstrap \
 		&& \
 		make -j$$(nproc);
