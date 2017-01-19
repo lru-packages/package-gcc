@@ -16,7 +16,7 @@ all:
 #-------------------------------------------------------------------------------
 
 .PHONY: gcc6
-gcc6: gcc6-vars info gcc6-compile install-tmp package move
+gcc6: gcc6-vars info clean install-deps gcc6-compile install-tmp package move
 
 #-------------------------------------------------------------------------------
 
