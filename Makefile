@@ -98,6 +98,14 @@ gcc6-compile:
 			--enable-threads \
 			--enable-tls \
 			--enable-bootstrap \
+			--enable-gold=yes \
+			--enable-ld=yes \
+			--enable-compressed-debug-sections=all \
+			--enable-libada \
+			--enable-libssp \
+			--enable-lto \
+			--enable-objc-gc \
+			--enable-vtable-verify \
 		&& \
 		make -j$$(nproc);
 
