@@ -107,6 +107,7 @@ gcc6-compile:
 			--enable-objc-gc \
 			--enable-vtable-verify \
 			--enable-generated-files-in-srcdir \
+			--enable-targets=all \
 		&& \
 		make -j$$(nproc);
 
