@@ -106,6 +106,7 @@ gcc6-compile:
 			--enable-lto \
 			--enable-objc-gc \
 			--enable-vtable-verify \
+			--enable-generated-files-in-srcdir \
 		&& \
 		make -j$$(nproc);
 
