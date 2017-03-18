@@ -4,7 +4,7 @@ PREFIX=/usr/local
 LICENSE=GPL-3.0
 VENDOR="Free Software Foundation"
 MAINTAINER="Ryan Parman"
-DESCRIPTION="The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Ada, and Go, as well as libraries for these languages (libstdc++,...)."
+DESCRIPTION="The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Ada, and Go, as well as libraries for these languages."
 URL=https://gcc.gnu.org
 RHEL=$(shell rpm -q --queryformat '%{VERSION}' centos-release)
 
