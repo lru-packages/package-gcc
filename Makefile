@@ -1,5 +1,4 @@
-EPOCH=1
-ITERATION=2
+ITERATION=1.lru
 PREFIX=/usr/local
 LICENSE=GPL-3.0
 VENDOR="Free Software Foundation"
@@ -134,7 +133,6 @@ package:
 		-v $(VERSION) \
 		-C /tmp/installdir-$(NAME)-$(VERSION) \
 		-m $(MAINTAINER) \
-		--epoch $(EPOCH) \
 		--iteration $(ITERATION) \
 		--license $(LICENSE) \
 		--vendor $(VENDOR) \
@@ -160,7 +158,6 @@ package:
 		-v $(VERSION) \
 		-C /tmp/installdir-$(NAME)-$(VERSION) \
 		-m $(MAINTAINER) \
-		--epoch $(EPOCH) \
 		--iteration $(ITERATION) \
 		--license $(LICENSE) \
 		--vendor $(VENDOR) \
@@ -189,7 +186,6 @@ package:
 		-v $(VERSION) \
 		-C /tmp/installdir-$(NAME)-$(VERSION) \
 		-m $(MAINTAINER) \
-		--epoch 1 \
 		--iteration $(ITERATION) \
 		--license $(LICENSE) \
 		--vendor $(VENDOR) \
@@ -216,7 +212,6 @@ package:
 		-v $(VERSION) \
 		-C /tmp/installdir-$(NAME)-$(VERSION) \
 		-m $(MAINTAINER) \
-		--epoch 1 \
 		--iteration $(ITERATION) \
 		--license $(LICENSE) \
 		--vendor $(VENDOR) \
