@@ -45,7 +45,7 @@ info:
 
 .PHONY: clean
 clean:
-	rm -Rf /tmp/installdir* gcc*.rpm gmon.out
+	rm -Rf /tmp/installdir* gcc* gmon.out
 
 #-------------------------------------------------------------------------------
 
