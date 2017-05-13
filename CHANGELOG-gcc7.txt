@@ -1,0 +1,2 @@
+* Sat May 13 2017 Ryan Parman <ryan@ryanparman.com> 7.1.0-1
+- Bundles GCC 7.1.0.
