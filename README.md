@@ -10,4 +10,5 @@ Edit the `Makefile` to ensure that you are setting the intended version, then ru
 
 ```bash
 make gcc6
+make gcc7
 ```
