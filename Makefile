@@ -5,17 +5,22 @@ VENDOR="Free Software Foundation"
 MAINTAINER="Ryan Parman"
 DESCRIPTION="The GNU Compiler Collection includes front ends for C, C++, Objective-C, Fortran, Ada, and Go, as well as libraries for these languages."
 URL=https://gcc.gnu.org
-RHEL=$(shell rpm -q --queryformat '%{VERSION}' centos-release)
+ACTUALOS=$(shell osqueryi "select * from os_version;" --json | jq -r ".[].name")
+EL=$(shell if [[ "$(ACTUALOS)" == "Amazon Linux AMI" ]]; then echo alami; else echo el; fi)
+RHEL=$(shell [[ -f /etc/centos-release ]] && rpm -q --queryformat '%{VERSION}' centos-release)
 
 #-------------------------------------------------------------------------------
 
 all:
-	@echo "Run 'make gcc6'."
+	@echo "Run 'make gcc6' or 'make gcc7'."
 
 #-------------------------------------------------------------------------------
 
 .PHONY: gcc6
-gcc6: gcc6-vars info clean install-deps gcc6-compile install-tmp package move
+gcc6: gcc6-vars info clean install-deps gcc-compile install-tmp package move
+
+.PHONY: gcc7
+gcc7: gcc7-vars info clean install-deps gcc-compile install-tmp package move
 
 #-------------------------------------------------------------------------------
 
@@ -23,6 +28,11 @@ gcc6: gcc6-vars info clean install-deps gcc6-compile install-tmp package move
 gcc6-vars:
 	$(eval NAME=gcc6)
 	$(eval VERSION=6.3.0)
+
+.PHONY: gcc7-vars
+gcc7-vars:
+	$(eval NAME=gcc7)
+	$(eval VERSION=7.1.0)
 
 #-------------------------------------------------------------------------------
 
@@ -37,6 +47,8 @@ info:
 	@ echo "MAINTAINER:  $(MAINTAINER)"
 	@ echo "DESCRIPTION: $(DESCRIPTION)"
 	@ echo "URL:         $(URL)"
+	@ echo "OS:          $(ACTUALOS)"
+	@ echo "EL:          $(EL)"
 	@ echo "RHEL:        $(RHEL)"
 	@ echo " "
 
@@ -82,8 +94,8 @@ install-deps:
 
 #-------------------------------------------------------------------------------
 
-.PHONY: gcc6-compile
-gcc6-compile:
+.PHONY: gcc-compile
+gcc-compile:
 	wget http://mirrors-usa.go-parts.com/gcc/releases/gcc-$(VERSION)/gcc-$(VERSION).tar.bz2;
 	tar jxvf gcc-$(VERSION).tar.bz2;
 	cd ./gcc-$(VERSION) && \
@@ -126,7 +138,7 @@ package:
 	# Main package
 	fpm \
 		-f \
-		-d "$(NAME)-libs = $(EPOCH):$(VERSION)-$(ITERATION).el$(RHEL)" \
+		-d "$(NAME)-libs = $(VERSION)-$(ITERATION).$(EL)$(RHEL)" \
 		-s dir \
 		-t rpm \
 		-n $(NAME) \
@@ -144,7 +156,7 @@ package:
 		--rpm-compression gzip \
 		--rpm-os linux \
 		--rpm-changelog CHANGELOG-$(NAME).txt \
-		--rpm-dist el$(RHEL) \
+		--rpm-dist $(EL)$(RHEL) \
 		--rpm-auto-add-directories \
 		usr/local/bin \
 	;
@@ -169,7 +181,7 @@ package:
 		--rpm-compression gzip \
 		--rpm-os linux \
 		--rpm-changelog CHANGELOG-$(NAME).txt \
-		--rpm-dist el$(RHEL) \
+		--rpm-dist $(EL)$(RHEL) \
 		--rpm-auto-add-directories \
 		usr/local/lib \
 		usr/local/lib64 \
@@ -179,7 +191,7 @@ package:
 	# Development package
 	fpm \
 		-f \
-		-d "$(NAME) = $(EPOCH):$(VERSION)-$(ITERATION).el$(RHEL)" \
+		-d "$(NAME) = $(VERSION)-$(ITERATION).$(EL)$(RHEL)" \
 		-s dir \
 		-t rpm \
 		-n $(NAME)-devel \
@@ -197,7 +209,7 @@ package:
 		--rpm-compression gzip \
 		--rpm-os linux \
 		--rpm-changelog CHANGELOG-$(NAME).txt \
-		--rpm-dist el$(RHEL) \
+		--rpm-dist $(EL)$(RHEL) \
 		--rpm-auto-add-directories \
 		usr/local/include \
 	;
@@ -205,7 +217,7 @@ package:
 	# Documentation package
 	fpm \
 		-f \
-		-d "$(NAME) = $(EPOCH):$(VERSION)-$(ITERATION).el$(RHEL)" \
+		-d "$(NAME) = $(VERSION)-$(ITERATION).$(EL)$(RHEL)" \
 		-s dir \
 		-t rpm \
 		-n $(NAME)-doc \
@@ -223,7 +235,7 @@ package:
 		--rpm-compression gzip \
 		--rpm-os linux \
 		--rpm-changelog CHANGELOG-$(NAME).txt \
-		--rpm-dist el$(RHEL) \
+		--rpm-dist $(EL)$(RHEL) \
 		--rpm-auto-add-directories \
 		usr/local/share \
 	;
@@ -232,4 +244,4 @@ package:
 
 .PHONY: move
 move:
-	mv *.rpm /vagrant/repo
+	[[ -d /vagrant/repo ]] && mv *.rpm /vagrant/repo/
