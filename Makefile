@@ -27,12 +27,12 @@ gcc7: gcc7-vars info clean install-deps gcc-compile install-tmp package move
 .PHONY: gcc6-vars
 gcc6-vars:
 	$(eval NAME=gcc6)
-	$(eval VERSION=6.3.0)
+	$(eval VERSION=6.4.0)
 
 .PHONY: gcc7-vars
 gcc7-vars:
 	$(eval NAME=gcc7)
-	$(eval VERSION=7.1.0)
+	$(eval VERSION=7.2.0)
 
 #-------------------------------------------------------------------------------
 
