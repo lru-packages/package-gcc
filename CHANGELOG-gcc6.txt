@@ -1,2 +1,5 @@
+* Sun Sep 24 2017 Ryan Parman <ryan@ryanparman.com> 6.4.0-1
+- Bundles GCC 6.4.0.
+
 * Wed Jan 18 2017 Ryan Parman <ryan@ryanparman.com> 6.3.0-1
 - Bundles GCC 6.3.0.
