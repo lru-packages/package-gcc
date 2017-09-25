@@ -96,8 +96,8 @@ install-deps:
 
 .PHONY: gcc-compile
 gcc-compile:
-	wget http://mirrors-usa.go-parts.com/gcc/releases/gcc-$(VERSION)/gcc-$(VERSION).tar.bz2;
-	tar jxvf gcc-$(VERSION).tar.bz2;
+	wget http://www.netgull.com/gcc/releases/gcc-$(VERSION)/gcc-$(VERSION).tar.gz;
+	tar zxvf gcc-$(VERSION).tar.gz;
 	cd ./gcc-$(VERSION) && \
 		contrib/download_prerequisites && \
 	cd .. && \
